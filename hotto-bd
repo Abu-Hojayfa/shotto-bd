@@ -1,0 +1,68 @@
+[33mcommit 9dcc43b98768464627b068abe5ffeaf7a64041b0[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32memergency-mode[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m
+Author: Abu-Hojayfa <abu.hojayfa100@gmail.com>
+Date:   Mon May 4 23:31:55 2026 +0600
+
+    file extension mistasken fix
+
+[33mcommit 5fab2f20264adc53fb531d313572896a27d83cb5[m
+Merge: b7a7d7d 1ee74e4
+Author: Hojayfa <76752229+Abu-Hojayfa@users.noreply.github.com>
+Date:   Mon May 4 23:30:17 2026 +0600
+
+    Merge pull request #1 from Abu-Hojayfa/nusrat-new-branch
+    
+    add signup- page
+
+[33mcommit 1ee74e46a6bee612e0671b4c1c19cfbb6291cc72[m[33m ([m[1;31morigin/nusrat-new-branch[m[33m)[m
+Author: nusratjahan <toma131388@gmail.com>
+Date:   Mon May 4 23:28:07 2026 +0600
+
+    add signup- page
+
+[33mcommit b7a7d7d1c4cb9703d1f36adc20a686199b27d231[m
+Author: Abu-Hojayfa <abu.hojayfa100@gmail.com>
+Date:   Mon May 4 17:50:02 2026 +0600
+
+    header
+
+[33mcommit dd0ae843f72ad1650cd36ac5360adb7dc419f5c2[m
+Author: Abu-Hojayfa <abu.hojayfa100@gmail.com>
+Date:   Mon May 4 17:25:06 2026 +0600
+
+    default template for reusable
+
+[33mcommit 591e0acbddc5dfbde5ca5221d0d9cdadcb168caa[m
+Author: Abu-Hojayfa <abu.hojayfa100@gmail.com>
+Date:   Mon May 4 16:53:18 2026 +0600
+
+    emergency button
+
+[33mcommit bef2c5686616ede29cc96c4eed752185c7c29c9e[m
+Author: Abu-Hojayfa <abu.hojayfa100@gmail.com>
+Date:   Mon May 4 16:40:55 2026 +0600
+
+    readme file updated
+
+[33mcommit 84707332b3106b552ffa9fc1f26a73081cd44a05[m
+Author: Abu-Hojayfa <abu.hojayfa100@gmail.com>
+Date:   Mon May 4 15:47:34 2026 +0600
+
+    typescript eror fix
+
+[33mcommit d0d766effbcf83500c92c706012dfd8b2c2e4fe8[m
+Author: Abu-Hojayfa <abu.hojayfa100@gmail.com>
+Date:   Mon May 4 14:55:43 2026 +0600
+
+    tailwind working, main page working + folder stucture
+
+[33mcommit 85e5b297947e982f83cd49c5ac30935e83ae1ae8[m
+Author: Abu-Hojayfa <abu.hojayfa100@gmail.com>
+Date:   Mon May 4 01:46:45 2026 +0600
+
+    setting up
+
+[33mcommit 5c2ead5ac1a88f3ca112fbb78ef6226b00d0bd85[m
+Author: Abu-Hojayfa <abu.hojayfa100@gmail.com>
+Date:   Mon May 4 01:44:16 2026 +0600
+
+    Initial commit from create-react-router
