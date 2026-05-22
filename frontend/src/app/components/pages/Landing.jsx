@@ -2,22 +2,27 @@ import { Header } from '../shared/Header';
 import { Footer } from '../shared/Footer';
 import { HeroSection } from '../landing/HeroSection';
 import { StatsSection } from '../landing/StatsSection';
-import { HowItWorks } from '../landing/HowItWorks';
+import { CompactFeatures } from '../landing/CompactFeatures';
 import { HeatmapSection } from '../landing/HeatmapSection';
-import { SecuritySection } from '../landing/SecuritySection';
-import { TrustBadges } from '../landing/TrustBadges';
 
 export function Landing() {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-transparent">
       <Header />
-      <main className="pt-16 sm:pt-20">
+      <main>
+        {/* Impactful Hero */}
         <HeroSection />
-        <StatsSection />
+        
+        {/* Quick Stats bar */}
+        <div className="border-y border-border/50 bg-card/30">
+          <StatsSection />
+        </div>
+
+        {/* Visual Heatmap - Compacted by Stats above it */}
         <HeatmapSection />
-        <HowItWorks />
-        <SecuritySection />
-        <TrustBadges />
+
+        {/* Consolidated Bento Grid for Features, Security & Trust */}
+        <CompactFeatures />
       </main>
       <Footer />
     </div>

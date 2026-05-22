@@ -12,17 +12,58 @@ export function Login() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  const handleLogin = (e) => {
+
+  const handleLogin = async (e) => {
     e.preventDefault();
-    // Mock login logic
+
+    setError('');
+
     if (!email || !password) {
       setError('Please fill in all fields');
       return;
     }
-    // Simulate successful login
-    localStorage.setItem('isLoggedIn', 'true');
-    localStorage.setItem('userEmail', email);
-    window.location.href = '/dashboard';
+
+    try {
+      const response = await fetch('http://localhost:5000/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      });
+
+      const data = await response.json();
+
+      console.log(data);
+
+      if (!response.ok) {
+        setError(data.message || 'Login failed');
+        return;
+      }
+
+      const user = data.data.user;
+      const token = data.data.accessToken;
+
+      // Save auth info
+      localStorage.setItem('token', token);
+      localStorage.setItem('isLoggedIn', 'true');
+      localStorage.setItem('userEmail', user.email);
+      localStorage.setItem('userName', user.fullName);
+      localStorage.setItem('userRole', user.role);
+
+      // Redirect
+      window.location.href =
+        user.role === 'official'
+          ? '/admin-dashboard'
+          : '/dashboard';
+
+    } catch (error) {
+      console.error(error);
+      setError('Server error');
+    }
   };
 
   return (
@@ -40,7 +81,7 @@ export function Login() {
               <div className="absolute inset-0 blur-xl bg-primary/30 group-hover:bg-primary/50 transition-all" />
             </div>
           </Link>
-          <h1 className="text-3xl font-bold text-foreground mb-2">Welcome Back</h1>
+          <h1 className="text-3xl font-bold text-foreground mb-2">Citizen Portal</h1>
           <p className="text-muted-foreground">স্বাগতম - Login to your account</p>
         </div>
 
@@ -181,17 +222,23 @@ export function Login() {
           </div>
         </GlassCard>
 
-        {/* Anonymous Reporting Notice */}
+        {/* Anonymous Reporting & Admin Links */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2 }}
-          className="mt-6 text-center"
+          className="mt-6 text-center space-y-3"
         >
           <p className="text-sm text-muted-foreground">
             Want to report anonymously?{' '}
             <Link to="/report" className="text-primary hover:text-primary/80 font-semibold">
               No account needed
+            </Link>
+          </p>
+          <p className="text-sm text-muted-foreground">
+            Are you a Government Official?{' '}
+            <Link to="/admin-login" className="text-blue-500 hover:text-blue-400 font-semibold">
+              Admin Login
             </Link>
           </p>
         </motion.div>
