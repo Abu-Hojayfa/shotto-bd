@@ -11,6 +11,7 @@ import { DesignSystem } from './components/pages/DesignSystem';
 import { Login } from './components/pages/Login';
 import { Signup } from './components/pages/Signup';
 import { ForgotPassword } from './components/pages/ForgotPassword';
+import { ResetPassword } from './components/pages/ResetPassword';
 import { GovernmentProfile } from './components/pages/GovernmentProfile';
 import { AdminLogin } from './components/pages/AdminLogin';
 import { AdminDashboard } from './components/pages/AdminDashboard';
@@ -46,6 +47,7 @@ export default function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/admin-login" element={<AdminLogin />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password/:token" element={<ResetPassword />} />
           <Route path="/report" element={<ReportFlow />} />
           
           {/* Protected Citizen Routes */}

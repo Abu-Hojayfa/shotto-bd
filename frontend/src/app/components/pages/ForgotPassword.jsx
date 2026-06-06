@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router';
-import { Shield, ArrowLeft, Mail, CheckCircle } from 'lucide-react';
+import { Shield, ArrowLeft, Mail, CheckCircle, AlertCircle } from 'lucide-react';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { GlassCard } from '../shared/GlassCard';
@@ -9,12 +9,38 @@ import { motion } from 'motion/react';
 export function ForgotPassword() {
   const [email, setEmail] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [error, setError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (email) {
-      // Simulate password reset email
+    if (!email) return;
+
+    setError('');
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch('http://localhost:5000/api/auth/forgot-password', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        setError(data.message || 'Something went wrong. Please try again.');
+        return;
+      }
+
       setIsSubmitted(true);
+    } catch (err) {
+      console.error(err);
+      setError('Connection error. Please try again later.');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -50,6 +76,17 @@ export function ForgotPassword() {
                 </p>
               </div>
 
+              {error && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="flex items-center space-x-2 p-3 bg-destructive/10 border border-destructive/30 rounded-lg text-destructive text-sm"
+                >
+                  <AlertCircle className="w-4 h-4 flex-shrink-0" />
+                  <span>{error}</span>
+                </motion.div>
+              )}
+
               {/* Email Input */}
               <div className="space-y-2">
                 <label htmlFor="email" className="text-sm font-medium text-foreground">
@@ -63,6 +100,7 @@ export function ForgotPassword() {
                   onChange={(e) => setEmail(e.target.value)}
                   className="bg-input border-border text-foreground"
                   required
+                  disabled={isSubmitting}
                 />
               </div>
 
@@ -70,8 +108,9 @@ export function ForgotPassword() {
               <Button
                 type="submit"
                 className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
+                disabled={isSubmitting}
               >
-                Send Reset Link
+                {isSubmitting ? 'Sending Link...' : 'Send Reset Link'}
               </Button>
 
               {/* Back to Login */}
