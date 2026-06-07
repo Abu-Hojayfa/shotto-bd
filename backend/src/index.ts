@@ -1,4 +1,5 @@
 import 'dotenv/config';
+import http from "http";
 import connectDB from './config/db';
 import createApp from './server';
 
@@ -8,9 +9,16 @@ const start = async (): Promise<void> => {
   await connectDB();
 
   const app    = createApp();
+
+  // Initialize socket
+  initSocket( httpServer );
+  
   const server = app.listen(PORT, () => {
     console.log(`\n🚀 Server  : http://localhost:${PORT}`);
     console.log(`🔗 Health  : http://localhost:${PORT}/health`);
+    console.log(
+      `🚨 Emergency API: http://localhost:${ PORT }/api/emergency\n`
+    );
     console.log(`🔐 Auth    : http://localhost:${PORT}/api/auth`);
     console.log(`👤 Users   : http://localhost:${PORT}/api/users\n`);
   });
