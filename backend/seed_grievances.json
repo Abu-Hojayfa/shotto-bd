@@ -1,0 +1,57 @@
+[
+  {
+    "_id": { "$oid": "665f2b3c4d5e6f7a8b9c0001" },
+    "departmentId": { "$oid": "665f1a2b3c4d5e6f7a8b9c01" },
+    "trackingId": "GRV-2026-AB12CD",
+    "description": "Traffic police officers are not following proper protocol at Farmgate intersection. Vehicles going in the wrong direction are being let through without any action, causing accidents.",
+    "status": "under_review",
+    "responseNote": "Case assigned to Internal Affairs Unit. Investigation in progress.",
+    "resolvedAt": null,
+    "createdAt": { "$date": "2026-04-01T08:30:00.000Z" },
+    "updatedAt": { "$date": "2026-04-03T10:00:00.000Z" }
+  },
+  {
+    "_id": { "$oid": "665f2b3c4d5e6f7a8b9c0002" },
+    "departmentId": { "$oid": "665f1a2b3c4d5e6f7a8b9c01" },
+    "trackingId": "GRV-2026-EF34GH",
+    "description": "Traffic signals at Motijheel are broken for the past 2 weeks. Despite multiple complaints to local police post, no repair action has been taken. This is causing major traffic jams every morning.",
+    "status": "resolved",
+    "responseNote": "Signal repaired on April 12, 2026 by DMP Technical Unit. CCTV installed for monitoring.",
+    "resolvedAt": { "$date": "2026-04-12T15:00:00.000Z" },
+    "createdAt": { "$date": "2026-03-29T14:00:00.000Z" },
+    "updatedAt": { "$date": "2026-04-12T15:00:00.000Z" }
+  },
+  {
+    "_id": { "$oid": "665f2b3c4d5e6f7a8b9c0003" },
+    "departmentId": { "$oid": "665f1a2b3c4d5e6f7a8b9c01" },
+    "trackingId": "GRV-2026-IJ56KL",
+    "description": "Illegal parking enforcement is being selectively applied. Vehicles parked outside a specific restaurant near Gulshan-1 are never ticketed despite clear no-parking signs.",
+    "status": "pending",
+    "responseNote": "",
+    "resolvedAt": null,
+    "createdAt": { "$date": "2026-04-08T11:45:00.000Z" },
+    "updatedAt": { "$date": "2026-04-08T11:45:00.000Z" }
+  },
+  {
+    "_id": { "$oid": "665f2b3c4d5e6f7a8b9c0004" },
+    "departmentId": { "$oid": "665f1a2b3c4d5e6f7a8b9c02" },
+    "trackingId": "GRV-2026-MN78OP",
+    "description": "Water supply to our area (Rayer Bazar, Block C) has been disrupted for 5 days. WASA officials have not responded to calls. This is a serious health emergency for 3,000 families.",
+    "status": "resolved",
+    "responseNote": "Emergency repair team deployed. Main pipe valve failure fixed. Supply restored on April 6th.",
+    "resolvedAt": { "$date": "2026-04-06T18:00:00.000Z" },
+    "createdAt": { "$date": "2026-04-01T09:00:00.000Z" },
+    "updatedAt": { "$date": "2026-04-06T18:00:00.000Z" }
+  },
+  {
+    "_id": { "$oid": "665f2b3c4d5e6f7a8b9c0005" },
+    "departmentId": { "$oid": "665f1a2b3c4d5e6f7a8b9c02" },
+    "trackingId": "GRV-2026-QR90ST",
+    "description": "Water supplied to our area (Dhanmondi Road 27) has a very bad smell and appears discoloured. We are afraid it is unsafe for drinking. Please investigate and fix.",
+    "status": "under_review",
+    "responseNote": "Water quality team deployed for sampling on April 10. Lab results expected within 72 hours.",
+    "resolvedAt": null,
+    "createdAt": { "$date": "2026-04-09T16:30:00.000Z" },
+    "updatedAt": { "$date": "2026-04-10T09:00:00.000Z" }
+  }
+]

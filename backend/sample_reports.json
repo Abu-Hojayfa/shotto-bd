@@ -1,0 +1,55 @@
+[
+  {
+    "id": "STB-2026-A7X9K",
+    "title": "Police Bribery Request",
+    "category": "Police Harassment",
+    "location": "Dhaka, Motijheel",
+    "status": "Pending",
+    "date": "2026-06-05",
+    "description": "Officer demanded 500 BDT for issuing verification certificate.",
+    "reporter": "Anonymous",
+    "remarks": "",
+    "priority": "Medium",
+    "evidence": [
+      {
+        "id": 1,
+        "type": "audio/mp3",
+        "url": "https://res.cloudinary.com/dw3spouoj/raw/upload/v1234567/recording.mp3",
+        "title": "audio_evidence.mp3"
+      }
+    ]
+  },
+  {
+    "id": "STB-2026-B2M4L",
+    "title": "Land Deed Delay Extortion",
+    "category": "Land Issues",
+    "location": "Chittagong, Gulshan Land Office",
+    "status": "In Progress",
+    "date": "2026-06-01",
+    "description": "Land registrar clerk requested a bribe of 5000 BDT to finalize property deed transfer.",
+    "reporter": "Ahmed Rahman",
+    "remarks": "Investigation team assigned.",
+    "priority": "High",
+    "evidence": [
+      {
+        "id": 1,
+        "type": "image/jpeg",
+        "url": "https://res.cloudinary.com/dw3spouoj/raw/upload/v1234567/deed_copy.jpg",
+        "title": "deed_screenshot.jpg"
+      }
+    ]
+  },
+  {
+    "id": "STB-2026-C9P6N",
+    "title": "Hospital Overcharging",
+    "category": "Health Sector",
+    "location": "Rajshahi, Medical College",
+    "status": "Resolved",
+    "date": "2026-05-28",
+    "description": "Hospital billing desk charged patients double the government-mandated price for test kits.",
+    "reporter": "Anonymous",
+    "remarks": "Billing office audited and correct pricing restored.",
+    "priority": "Medium",
+    "evidence": []
+  }
+]

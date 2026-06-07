@@ -16,99 +16,51 @@ import {
   MessageSquare,
   ArrowRight
 } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { Textarea } from '../ui/textarea';
 
-const MOCK_REPORTS_INITIAL = [
-  {
-    id: "SR-8921",
-    title: "Unauthorized fee at Land Office",
-    category: "Extortion",
-    location: "Dhaka",
-    status: "Pending",
-    date: "2024-05-14",
-    description: "Citizens are being asked for an extra 500 BDT for every land registration without any official receipt.",
-    reporter: "Anonymous",
-    remarks: ""
-  },
-  {
-    id: "SR-8918",
-    title: "Embezzlement in Local Road Project",
-    category: "Financial Fraud",
-    location: "Chittagong",
-    status: "In Progress",
-    date: "2024-05-12",
-    description: "The quality of materials used in the new bypass road is significantly lower than specified in the tender.",
-    reporter: "M. Ahmed",
-    remarks: "Verification team sent to the site.",
-    priority: "Medium",
-    evidence: [
-      { id: 1, type: 'image', url: 'https://images.unsplash.com/photo-1541888941259-79974df19644?w=600', title: 'Road Construction Photo' }
-    ]
-  },
-  {
-    id: "SR-8895",
-    title: "Fake Medical Certificates Issuance",
-    category: "Bribery",
-    location: "Sylhet",
-    status: "Resolved",
-    date: "2024-05-10",
-    description: "A clinic staff member was caught issuing medical clearance certificates for a fee of 1000 BDT.",
-    reporter: "Anonymous",
-    remarks: "Staff member suspended and handed over to police.",
-    priority: "Low",
-    evidence: [
-      { id: 1, type: 'image', url: 'https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?w=600', title: 'Clinic Entry Log' }
-    ]
-  },
-  {
-    id: "SR-8872",
-    title: "Bypass of Environmental Regulations",
-    category: "Policy Violation",
-    location: "Gazipur",
-    status: "In Progress",
-    date: "2024-05-08",
-    description: "A local textile factory is dumping untreated waste into the river at night.",
-    reporter: "Local Resident",
-    remarks: "Notice issued to the factory management.",
-    priority: "High",
-    evidence: [
-      { id: 1, type: 'image', url: 'https://images.unsplash.com/photo-1525824236856-8c0a31dfe3be?w=600', title: 'River Pollution Photo' }
-    ]
-  },
-  {
-    id: "SR-8850",
-    title: "Illegal Sand Extraction Protection",
-    category: "Corruption",
-    location: "Narsingdi",
-    status: "Pending",
-    date: "2024-05-05",
-    description: "Local influencers are protecting sand lifters on the river bank, despite court orders.",
-    reporter: "Anonymous",
-    remarks: ""
-  }
-];
+const API = 'http://localhost:5000/api';
 
 export function AdminDashboard() {
   const [adminName, setAdminName] = useState('Official');
   const [department, setDepartment] = useState('Government Office');
-  const [reports, setReports] = useState(MOCK_REPORTS_INITIAL);
+  const [reports, setReports] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [selectedReport, setSelectedReport] = useState(null);
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
-  
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   // Modal State
   const [newStatus, setNewStatus] = useState('');
   const [adminRemarks, setAdminRemarks] = useState('');
   const [previewImage, setPreviewImage] = useState(null);
+
+  // ── Fetch reports from backend ─────────────────────────────────────────────
+  const fetchReports = useCallback(async () => {
+    setIsLoading(true);
+    setError(null);
+    try {
+      const res = await fetch(`${API}/reports`);
+      if (!res.ok) throw new Error(`Failed to load reports (${res.status})`);
+      const data = await res.json();
+      setReports(data.data?.reports ?? []);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
 
   useEffect(() => {
     const savedName = localStorage.getItem('userEmail')?.split('@')[0] || 'Official';
     const savedDept = localStorage.getItem('department') || 'Ministry of Public Administration';
     setAdminName(savedName);
     setDepartment(savedDept);
-  }, []);
+    fetchReports();
+  }, [fetchReports]);
 
   const openUpdateModal = (report) => {
     setSelectedReport(report);
@@ -117,14 +69,25 @@ export function AdminDashboard() {
     setIsUpdateModalOpen(true);
   };
 
-  const handleUpdateStatus = () => {
-    setReports(prev => prev.map(r => 
-      r.id === selectedReport.id 
-        ? { ...r, status: newStatus, remarks: adminRemarks } 
-        : r
-    ));
-    setIsUpdateModalOpen(false);
-    setSelectedReport(null);
+  const handleUpdateStatus = async () => {
+    if (!selectedReport) return;
+    setIsSubmitting(true);
+    try {
+      const res = await fetch(`${API}/reports/${selectedReport.id}/status`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ status: newStatus, remarks: adminRemarks }),
+      });
+      if (!res.ok) throw new Error(`Update failed (${res.status})`);
+      // Refresh reports list from the server to get the latest data
+      await fetchReports();
+    } catch (err) {
+      alert('Failed to update report: ' + err.message);
+    } finally {
+      setIsSubmitting(false);
+      setIsUpdateModalOpen(false);
+      setSelectedReport(null);
+    }
   };
 
   const stats = [
@@ -149,7 +112,14 @@ export function AdminDashboard() {
       
       <main className="pt-24 pb-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto space-y-8">
-          
+
+          {/* Error Banner */}
+          {error && (
+            <div className="p-4 bg-destructive/10 border border-destructive/30 rounded-xl text-destructive text-sm font-medium">
+              ⚠️ {error} — <button onClick={fetchReports} className="underline font-bold">Retry</button>
+            </div>
+          )}
+
           {/* Welcome Header */}
           <motion.div 
             initial={{ opacity: 0, x: -20 }}
@@ -197,7 +167,9 @@ export function AdminDashboard() {
               </div>
               <div className="flex gap-2">
                 <Button variant="outline" size="sm" className="h-8 text-xs">Export CSV</Button>
-                <Button variant="outline" size="sm" className="h-8 text-xs text-primary border-primary/20 bg-primary/5">Refresh</Button>
+                <Button onClick={fetchReports} variant="outline" size="sm" className="h-8 text-xs text-primary border-primary/20 bg-primary/5">
+                  {isLoading ? 'Loading...' : 'Refresh'}
+                </Button>
               </div>
             </div>
 
@@ -214,7 +186,22 @@ export function AdminDashboard() {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-border/30">
-                  {reports.map((report) => (
+                  {isLoading ? (
+                    <tr>
+                      <td colSpan={6} className="px-6 py-12 text-center text-muted-foreground text-sm">
+                        <div className="flex items-center justify-center gap-2">
+                          <div className="w-4 h-4 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+                          Loading reports from database...
+                        </div>
+                      </td>
+                    </tr>
+                  ) : reports.length === 0 ? (
+                    <tr>
+                      <td colSpan={6} className="px-6 py-12 text-center text-muted-foreground text-sm">
+                        No reports found in the database.
+                      </td>
+                    </tr>
+                  ) : reports.map((report) => (
                     <tr key={report.id} className="hover:bg-primary/5 transition-colors group cursor-pointer" onClick={() => openUpdateModal(report)}>
                       <td className="px-6 py-4">
                         <span className="text-xs font-mono text-primary bg-primary/5 px-2 py-0.5 rounded">{report.id}</span>
@@ -388,13 +375,14 @@ export function AdminDashboard() {
 
                 {/* Modal Footer */}
                 <div className="p-4 bg-muted/30 border-t border-border flex justify-end gap-3">
-                  <Button variant="ghost" onClick={() => setIsUpdateModalOpen(false)}>Cancel</Button>
+                  <Button variant="ghost" onClick={() => setIsUpdateModalOpen(false)} disabled={isSubmitting}>Cancel</Button>
                   <Button 
                     className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 shadow-lg shadow-primary/20"
                     onClick={handleUpdateStatus}
+                    disabled={isSubmitting}
                   >
                     <Send className="w-4 h-4 mr-2" />
-                    Submit Changes
+                    {isSubmitting ? 'Saving...' : 'Submit Changes'}
                   </Button>
                 </div>
               </GlassCard>

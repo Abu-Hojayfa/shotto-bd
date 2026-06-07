@@ -5,6 +5,7 @@ import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { GlassCard } from '../shared/GlassCard';
 import { motion } from 'motion/react';
+import { GoogleLogin } from '@react-oauth/google';
 
 export function Signup() {
   const [showPassword, setShowPassword] = useState(false);
@@ -22,6 +23,45 @@ export function Signup() {
   });
   const [error, setError] = useState('');
   const [passwordStrength, setPasswordStrength] = useState(0);
+
+  const handleGoogleSuccess = async (credentialResponse) => {
+    setError('');
+    try {
+      const response = await fetch('http://localhost:5000/api/auth/google', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          idToken: credentialResponse.credential,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        setError(data.message || 'Google signup failed');
+        return;
+      }
+
+      const user = data.data.user;
+      const token = data.data.accessToken;
+
+      // Save auth info
+      localStorage.setItem('token', token);
+      localStorage.setItem('isLoggedIn', 'true');
+      localStorage.setItem('userEmail', user.email);
+      localStorage.setItem('userName', user.fullName);
+      localStorage.setItem('userRole', user.role);
+
+      // Redirect
+      window.location.href = '/dashboard';
+
+    } catch (error) {
+      console.error(error);
+      setError('Server error during Google signup');
+    }
+  };
 
   const checkPasswordStrength = (password) => {
     let strength = 0;
@@ -488,6 +528,32 @@ export function Signup() {
               {role === 'official' ? 'Register as Official' : 'Create Citizen Account'}
             </Button>
           </form>
+
+          {role === 'citizen' && (
+            <>
+              {/* Divider */}
+              <div className="relative my-6">
+                <div className="absolute inset-0 flex items-center">
+                  <div className="w-full border-t border-border"></div>
+                </div>
+                <div className="relative flex justify-center text-sm">
+                  <span className="px-4 bg-card text-muted-foreground">Or continue with</span>
+                </div>
+              </div>
+
+              {/* Social Signup Options */}
+              <div className="flex justify-center w-full">
+                <GoogleLogin
+                  onSuccess={handleGoogleSuccess}
+                  onError={() => setError('Google sign-up failed. Please try again.')}
+                  theme="filled_black"
+                  shape="rectangular"
+                  text="signup_with"
+                  width="384"
+                />
+              </div>
+            </>
+          )}
 
           {/* Sign In Link */}
           <div className="mt-6 text-center text-sm">

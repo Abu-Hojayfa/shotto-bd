@@ -14,12 +14,15 @@ export interface IUser extends Document {
   organization?: string;
   nationalId?: string;
   profileImage?: string;
+  googleId?: string;
   isVerified: boolean;
   isApproved: boolean;
   isActive: boolean;
   lastLogin?: Date;
   reportsSubmitted: number;
   reportsResolved: number;
+  passwordResetToken?: string;
+  passwordResetExpires?: Date;
   createdAt: Date;
   updatedAt: Date;
 
@@ -46,7 +49,12 @@ const userSchema = new Schema<IUser>(
     },
     password: {
       type: String,
-      required: [true, 'Password is required'],
+      required: [
+        function (this: any) {
+          return !this.googleId;
+        },
+        'Password is required',
+      ],
       minlength: [8, 'Password must be at least 8 characters'],
       select: false,
     },
@@ -76,24 +84,28 @@ const userSchema = new Schema<IUser>(
       sparse: true,
     },
     profileImage: { type: String, default: null },
+    googleId:     { type: String, sparse: true, default: null },
     isVerified:   { type: Boolean, default: false },
     isApproved:   { type: Boolean, default: false },
     isActive:     { type: Boolean, default: true },
     lastLogin:    { type: Date, default: null },
     reportsSubmitted: { type: Number, default: 0 },
     reportsResolved:  { type: Number, default: 0 },
+    passwordResetToken:   { type: String, default: null },
+    passwordResetExpires: { type: Date,   default: null },
   },
   { timestamps: true, versionKey: false }
 );
 
 // ── Indexes ───────────────────────────────────────────────────────────────────
-userSchema.index({ email: 1 });
 userSchema.index({ role: 1 });
 userSchema.index({ role: 1, isApproved: 1 });
 
 // ── Hooks ─────────────────────────────────────────────────────────────────────
 userSchema.pre('save', async function (next) {
   if (!this.isModified('password')) return next();
+  // Skip hashing if no password (Google OAuth users)
+  if (!this.password) return next();
   const rounds = parseInt(process.env.BCRYPT_SALT_ROUNDS || '12', 10);
   this.password = await bcrypt.hash(this.password, rounds);
   next();
@@ -107,6 +119,7 @@ userSchema.pre('save', function (next) {
 
 // ── Methods ───────────────────────────────────────────────────────────────────
 userSchema.methods.comparePassword = function (candidate: string): Promise<boolean> {
+  if (!this.password) return Promise.resolve(false); // Google-only users have no local password
   return bcrypt.compare(candidate, this.password);
 };
 
