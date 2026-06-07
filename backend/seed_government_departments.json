@@ -1,0 +1,262 @@
+[
+  {
+    "_id": { "$oid": "665f1a2b3c4d5e6f7a8b9c01" },
+    "name": "Dhaka Metropolitan Police - Traffic Division",
+    "nameBangla": "ঢাকা মেট্রোপলিটন পুলিশ - ট্রাফিক বিভাগ",
+    "hierarchy": "Ministry of Home Affairs → Bangladesh Police → DMP → Traffic Division",
+    "establishedYear": 1976,
+    "headOfficer": "Deputy Commissioner Md. Rahman",
+    "jurisdiction": "Dhaka Metropolitan Area",
+    "contact": {
+      "phone": "+880-2-9556600",
+      "email": "traffic@dmp.gov.bd",
+      "website": "www.dmp.gov.bd/traffic",
+      "address": "Rajarbagh Police Lines, Dhaka-1217"
+    },
+    "responsibilities": [
+      "Traffic management and control in Dhaka city",
+      "Enforcement of traffic laws and regulations",
+      "Road safety awareness programs",
+      "Vehicle inspection and licensing",
+      "Investigation of traffic-related incidents"
+    ],
+    "personnelCount": 1245,
+    "efficiencyScore": 94.2,
+    "isVerified": true,
+    "projects": [
+      {
+        "_id": { "$oid": "665f1a2b3c4d5e6f7a8b9c10" },
+        "name": "Smart Traffic Signal System",
+        "progress": 75,
+        "budget": 50000000,
+        "spent": 37500000,
+        "deadline": { "$date": "2026-12-31T00:00:00.000Z" },
+        "status": "on-track",
+        "evidence": "project-2026-Q1-report.pdf"
+      },
+      {
+        "_id": { "$oid": "665f1a2b3c4d5e6f7a8b9c11" },
+        "name": "CCTV Surveillance Expansion",
+        "progress": 45,
+        "budget": 30000000,
+        "spent": 13500000,
+        "deadline": { "$date": "2027-03-31T00:00:00.000Z" },
+        "status": "on-track",
+        "evidence": "surveillance-progress-2026.pdf"
+      },
+      {
+        "_id": { "$oid": "665f1a2b3c4d5e6f7a8b9c12" },
+        "name": "Traffic Police Training Program",
+        "progress": 60,
+        "budget": 5000000,
+        "spent": 3000000,
+        "deadline": { "$date": "2026-06-30T00:00:00.000Z" },
+        "status": "delayed",
+        "evidence": "training-audit-2026.pdf"
+      }
+    ],
+    "financials": [
+      {
+        "category": "Personnel Salaries",
+        "allocated": 120000000,
+        "spent": 118500000,
+        "quarter": "Q1 2026",
+        "verificationLink": "payroll-Q1-2026-audit.pdf"
+      },
+      {
+        "category": "Equipment & Vehicles",
+        "allocated": 45000000,
+        "spent": 42300000,
+        "quarter": "Q1 2026",
+        "verificationLink": "procurement-Q1-2026.pdf"
+      },
+      {
+        "category": "Infrastructure Maintenance",
+        "allocated": 25000000,
+        "spent": 23800000,
+        "quarter": "Q1 2026",
+        "verificationLink": "maintenance-Q1-2026.pdf"
+      },
+      {
+        "category": "Public Awareness Campaigns",
+        "allocated": 8000000,
+        "spent": 7200000,
+        "quarter": "Q1 2026",
+        "verificationLink": "campaign-expenses-Q1-2026.pdf"
+      }
+    ],
+    "updates": [
+      {
+        "date": { "$date": "2026-04-05T00:00:00.000Z" },
+        "title": "Traffic Safety Week Successfully Concluded",
+        "description": "Completed 7-day awareness campaign with 50,000+ participants across Dhaka",
+        "evidence": "safety-week-2026-report.pdf",
+        "verifiedBy": "Inspector General of Police"
+      },
+      {
+        "date": { "$date": "2026-03-28T00:00:00.000Z" },
+        "title": "New Traffic Signal Installation - Mohakhali",
+        "description": "15 smart traffic signals installed at major intersections",
+        "evidence": "mohakhali-project-completion.pdf",
+        "verifiedBy": "Chief Engineer, DMP"
+      },
+      {
+        "date": { "$date": "2026-03-15T00:00:00.000Z" },
+        "title": "Q1 2026 Budget Utilization Report Published",
+        "description": "94.2% budget utilization with full accountability",
+        "evidence": "Q1-2026-financial-audit.pdf",
+        "verifiedBy": "Comptroller and Auditor General"
+      }
+    ],
+    "datasets": [
+      {
+        "name": "Traffic Violation Statistics 2026",
+        "size": "2.4 MB",
+        "format": "CSV",
+        "updated": { "$date": "2026-04-01T00:00:00.000Z" },
+        "url": ""
+      },
+      {
+        "name": "Budget Allocation & Spending Q1 2026",
+        "size": "1.8 MB",
+        "format": "XLSX",
+        "updated": { "$date": "2026-04-01T00:00:00.000Z" },
+        "url": ""
+      },
+      {
+        "name": "Personnel Directory & Roles",
+        "size": "950 KB",
+        "format": "PDF",
+        "updated": { "$date": "2026-03-15T00:00:00.000Z" },
+        "url": ""
+      },
+      {
+        "name": "Road Safety Campaign Data",
+        "size": "3.2 MB",
+        "format": "CSV",
+        "updated": { "$date": "2026-03-28T00:00:00.000Z" },
+        "url": ""
+      },
+      {
+        "name": "Equipment Inventory & Maintenance",
+        "size": "1.5 MB",
+        "format": "XLSX",
+        "updated": { "$date": "2026-04-05T00:00:00.000Z" },
+        "url": ""
+      },
+      {
+        "name": "Public Complaint Resolution Metrics",
+        "size": "890 KB",
+        "format": "CSV",
+        "updated": { "$date": "2026-04-08T00:00:00.000Z" },
+        "url": ""
+      }
+    ],
+    "createdAt": { "$date": "2026-01-01T00:00:00.000Z" },
+    "updatedAt": { "$date": "2026-04-08T00:00:00.000Z" }
+  },
+  {
+    "_id": { "$oid": "665f1a2b3c4d5e6f7a8b9c02" },
+    "name": "Dhaka WASA - Water Supply & Sewerage Authority",
+    "nameBangla": "ঢাকা ওয়াসা - পানি সরবরাহ ও পয়ঃনিষ্কাশন কর্তৃপক্ষ",
+    "hierarchy": "Ministry of Local Government → LGRD Division → Dhaka WASA",
+    "establishedYear": 1963,
+    "headOfficer": "Managing Director Engr. Taqsem A Khan",
+    "jurisdiction": "Dhaka City Corporation Area",
+    "contact": {
+      "phone": "+880-2-9665500",
+      "email": "info@dwasa.org.bd",
+      "website": "www.dwasa.org.bd",
+      "address": "98 Kazi Nazrul Islam Avenue, Kawran Bazar, Dhaka-1215"
+    },
+    "responsibilities": [
+      "Supply of safe drinking water to Dhaka residents",
+      "Management of sewerage and drainage systems",
+      "Water treatment plant operation and maintenance",
+      "Storm water drainage management",
+      "Water quality monitoring and testing"
+    ],
+    "personnelCount": 4500,
+    "efficiencyScore": 78.5,
+    "isVerified": true,
+    "projects": [
+      {
+        "_id": { "$oid": "665f1a2b3c4d5e6f7a8b9c20" },
+        "name": "Saidabad Water Treatment Plant Phase-3",
+        "progress": 30,
+        "budget": 1200000000,
+        "spent": 360000000,
+        "deadline": { "$date": "2028-12-31T00:00:00.000Z" },
+        "status": "on-track",
+        "evidence": "saidabad-phase3-Q1-2026.pdf"
+      },
+      {
+        "_id": { "$oid": "665f1a2b3c4d5e6f7a8b9c21" },
+        "name": "Dhaka Water Network Rehabilitation",
+        "progress": 55,
+        "budget": 450000000,
+        "spent": 247500000,
+        "deadline": { "$date": "2027-06-30T00:00:00.000Z" },
+        "status": "on-track",
+        "evidence": "network-rehab-progress-2026.pdf"
+      }
+    ],
+    "financials": [
+      {
+        "category": "Personnel Salaries",
+        "allocated": 350000000,
+        "spent": 342000000,
+        "quarter": "Q1 2026",
+        "verificationLink": "wasa-payroll-Q1-2026.pdf"
+      },
+      {
+        "category": "Chemical & Treatment Costs",
+        "allocated": 180000000,
+        "spent": 171000000,
+        "quarter": "Q1 2026",
+        "verificationLink": "chemicals-Q1-2026.pdf"
+      },
+      {
+        "category": "Infrastructure Repair",
+        "allocated": 220000000,
+        "spent": 198000000,
+        "quarter": "Q1 2026",
+        "verificationLink": "infra-repair-Q1-2026.pdf"
+      }
+    ],
+    "updates": [
+      {
+        "date": { "$date": "2026-04-10T00:00:00.000Z" },
+        "title": "Water Quality Report - March 2026 Published",
+        "description": "All 50 sampling points passed WHO drinking water standards",
+        "evidence": "water-quality-march-2026.pdf",
+        "verifiedBy": "BSTI & WHO Bangladesh"
+      },
+      {
+        "date": { "$date": "2026-03-20T00:00:00.000Z" },
+        "title": "Emergency Pipeline Repair - Mirpur Completed",
+        "description": "48-hour emergency repair of 800mm main pipeline serving 200,000 residents",
+        "evidence": "mirpur-pipeline-repair-2026.pdf",
+        "verifiedBy": "Chief Engineer, DWASA"
+      }
+    ],
+    "datasets": [
+      {
+        "name": "Daily Water Production Data 2026",
+        "size": "3.8 MB",
+        "format": "CSV",
+        "updated": { "$date": "2026-04-10T00:00:00.000Z" },
+        "url": ""
+      },
+      {
+        "name": "Water Quality Test Results Q1 2026",
+        "size": "2.1 MB",
+        "format": "PDF",
+        "updated": { "$date": "2026-04-08T00:00:00.000Z" },
+        "url": ""
+      }
+    ],
+    "createdAt": { "$date": "2026-01-01T00:00:00.000Z" },
+    "updatedAt": { "$date": "2026-04-10T00:00:00.000Z" }
+  }
+]

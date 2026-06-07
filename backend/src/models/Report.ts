@@ -18,6 +18,7 @@ export interface IReport extends Document {
   date: string;
   description: string;
   reporter: string;
+  reporterId?: mongoose.Types.ObjectId;
   remarks: string;
   priority?: 'Low' | 'Medium' | 'High';
   evidence?: IEvidence[];
@@ -65,6 +66,11 @@ const reportSchema = new Schema<IReport>(
     reporter: {
       type: String,
       default: 'Anonymous',
+    },
+    reporterId: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+      default: null,
     },
     remarks: {
       type: String,
