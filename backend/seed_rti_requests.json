@@ -1,0 +1,67 @@
+[
+  {
+    "_id": { "$oid": "665f3c4d5e6f7a8b9c000001" },
+    "departmentId": { "$oid": "665f1a2b3c4d5e6f7a8b9c01" },
+    "trackingId": "RTI-2026-AA11BB",
+    "subject": "Total number of traffic fines collected in Q1 2026",
+    "details": "Please provide the total amount of traffic fines collected by DMP Traffic Division in Q1 2026 (January to March), broken down by violation type (speeding, wrong side, no helmet, etc.) and by zone (Mirpur, Motijheel, Gulshan, etc.). This information is needed for academic research on traffic law enforcement effectiveness.",
+    "status": "responded",
+    "responseNote": "Total fines collected in Q1 2026: BDT 8,42,35,000. Full breakdown document attached: RTI-2026-AA11BB-response.pdf. Available at DMP Traffic HQ for physical copy.",
+    "dueDate": { "$date": "2026-04-22T00:00:00.000Z" },
+    "respondedAt": { "$date": "2026-04-18T11:00:00.000Z" },
+    "createdAt": { "$date": "2026-04-01T10:00:00.000Z" },
+    "updatedAt": { "$date": "2026-04-18T11:00:00.000Z" }
+  },
+  {
+    "_id": { "$oid": "665f3c4d5e6f7a8b9c000002" },
+    "departmentId": { "$oid": "665f1a2b3c4d5e6f7a8b9c01" },
+    "trackingId": "RTI-2026-CC22DD",
+    "subject": "Procurement details for Smart Traffic Signal System project",
+    "details": "Under the RTI Act 2009, I request information regarding: (1) The name of the vendor/contractor awarded the Smart Traffic Signal System project, (2) The tender process and bid documents, (3) Contract value and payment schedule, (4) Any sub-contractors involved. This is to verify proper procurement procedure.",
+    "status": "in_progress",
+    "responseNote": "Request acknowledged. Procurement records are being compiled. Response will be provided by due date.",
+    "dueDate": { "$date": "2026-04-28T00:00:00.000Z" },
+    "respondedAt": null,
+    "createdAt": { "$date": "2026-04-07T14:30:00.000Z" },
+    "updatedAt": { "$date": "2026-04-08T09:00:00.000Z" }
+  },
+  {
+    "_id": { "$oid": "665f3c4d5e6f7a8b9c000003" },
+    "departmentId": { "$oid": "665f1a2b3c4d5e6f7a8b9c01" },
+    "trackingId": "RTI-2026-EE33FF",
+    "subject": "Number of road accidents investigated in 2025",
+    "details": "I request the total number of road accidents investigated by DMP Traffic Division in 2025, including: (1) Total accidents, (2) Fatal accidents, (3) Non-fatal accidents, (4) Hit-and-run cases, (5) Number of cases where FIR was filed. Also, how many cases were resolved/convicted?",
+    "status": "submitted",
+    "responseNote": "",
+    "dueDate": { "$date": "2026-05-01T00:00:00.000Z" },
+    "respondedAt": null,
+    "createdAt": { "$date": "2026-04-10T08:00:00.000Z" },
+    "updatedAt": { "$date": "2026-04-10T08:00:00.000Z" }
+  },
+  {
+    "_id": { "$oid": "665f3c4d5e6f7a8b9c000004" },
+    "departmentId": { "$oid": "665f1a2b3c4d5e6f7a8b9c02" },
+    "trackingId": "RTI-2026-GG44HH",
+    "subject": "Water testing results for Rayer Bazar area 2026",
+    "details": "Please provide all water quality test results for the Rayer Bazar area conducted by DWASA from January to March 2026. I need the test dates, parameters tested (pH, turbidity, chlorine, coliform bacteria, etc.), results, and whether any results exceeded WHO/BSTI limits.",
+    "status": "responded",
+    "responseNote": "Water quality test results for Rayer Bazar (Jan-Mar 2026) attached. All tests within acceptable limits except one coliform count on Feb 14 which was immediately addressed with chlorination. Full report: RTI-2026-GG44HH-water-quality.pdf",
+    "dueDate": { "$date": "2026-04-26T00:00:00.000Z" },
+    "respondedAt": { "$date": "2026-04-20T14:00:00.000Z" },
+    "createdAt": { "$date": "2026-04-05T12:00:00.000Z" },
+    "updatedAt": { "$date": "2026-04-20T14:00:00.000Z" }
+  },
+  {
+    "_id": { "$oid": "665f3c4d5e6f7a8b9c000005" },
+    "departmentId": { "$oid": "665f1a2b3c4d5e6f7a8b9c02" },
+    "trackingId": "RTI-2026-II55JJ",
+    "subject": "List of ongoing infrastructure projects and their contractors",
+    "details": "Under RTI Act 2009, please provide: (1) A complete list of all infrastructure projects currently underway by DWASA in 2026, (2) Names of contractors for each project, (3) Contract amounts, (4) Project start and expected completion dates, (5) Current completion percentage. This is for public interest accountability purposes.",
+    "status": "acknowledged",
+    "responseNote": "RTI request received and acknowledged. Assigned to Public Relations Officer for processing.",
+    "dueDate": { "$date": "2026-05-03T00:00:00.000Z" },
+    "respondedAt": null,
+    "createdAt": { "$date": "2026-04-12T10:30:00.000Z" },
+    "updatedAt": { "$date": "2026-04-13T09:00:00.000Z" }
+  }
+]

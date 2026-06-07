@@ -1,35 +1,58 @@
+import { useState, useEffect } from 'react';
 import { FileText, CheckCircle, Clock, TrendingUp } from 'lucide-react';
 import { motion } from 'motion/react';
 import { GlassCard } from '../shared/GlassCard';
 
 export function DashboardStats({ district }) {
+  const [data, setData] = useState({
+    totalReports: 0,
+    resolvedReports: 0,
+    underReviewReports: 0,
+    resolutionRate: 0,
+  });
+
+  useEffect(() => {
+    const fetchStats = async () => {
+      try {
+        const response = await fetch(`http://localhost:5000/api/reports/stats?district=${district}`);
+        const result = await response.json();
+        if (response.ok && result.success) {
+          setData(result.data);
+        }
+      } catch (err) {
+        console.error('Error fetching dashboard stats:', err);
+      }
+    };
+    fetchStats();
+  }, [district]);
+
   const stats = [
     {
       icon: FileText,
       label: 'Total Reports',
-      value: district === 'all' ? '12,847' : '3,842',
-      change: '+12% this week',
+      value: data.totalReports.toLocaleString(),
+      change: 'Real-time database count',
       color: 'text-blue-400'
     },
     {
       icon: CheckCircle,
       label: 'Resolved',
-      value: district === 'all' ? '8,392' : '2,456',
-      change: '+8% this week',
+      value: data.resolvedReports.toLocaleString(),
+      change: 'Official closures',
       color: 'text-primary'
     },
     {
       icon: Clock,
       label: 'Under Review',
-      value: district === 'all' ? '3,245' : '1,123',
-      change: '456 new today',
+      value: data.underReviewReports.toLocaleString(),
+      change: 'Active investigations',
       color: 'text-yellow-500'
     },
     {
       icon: TrendingUp,
       label: 'Resolution Rate',
-      value: district === 'all' ? '65.3%' : '63.9%',
-      change: '+2.4% from last month',
+      value: `${data.resolutionRate}%`,
+      change: 'Average action time',
       color: 'text-primary'
     }
   ];

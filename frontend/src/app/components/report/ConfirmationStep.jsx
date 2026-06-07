@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { GlassCard } from '../shared/GlassCard';
 import { Button } from '../ui/button';
 import { CheckCircle, Copy, Download, ArrowRight, Shield } from 'lucide-react';
@@ -8,6 +8,47 @@ import { motion } from 'motion/react';
 export function ConfirmationStep({ reportData }) {
   const [trackingId] = useState(`STB-${Date.now()}-${Math.random().toString(36).substr(2, 9).toUpperCase()}`);
   const [copied, setCopied] = useState(false);
+
+  useEffect(() => {
+    const submitReport = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        const headers = {
+          'Content-Type': 'application/json',
+        };
+        if (token) {
+          headers['Authorization'] = `Bearer ${token}`;
+        }
+
+        const mappedEvidence = (reportData.evidence || []).map((file, idx) => ({
+          id: idx + 1,
+          type: file.type || 'image/jpeg',
+          url: `https://res.cloudinary.com/dw3spouoj/raw/upload/v1234567/${file.name}`,
+          title: file.name
+        }));
+
+        const response = await fetch('http://localhost:5000/api/reports', {
+          method: 'POST',
+          headers,
+          body: JSON.stringify({
+            id: trackingId,
+            category: reportData.issueType,
+            location: `${reportData.district}, ${reportData.location}`,
+            description: reportData.description,
+            evidence: mappedEvidence,
+          })
+        });
+
+        if (!response.ok) {
+          console.error('Failed to submit report to database');
+        }
+      } catch (err) {
+        console.error('Error submitting report:', err);
+      }
+    };
+
+    submitReport();
+  }, [reportData, trackingId]);
 
   const copyTrackingId = () => {
     navigator.clipboard.writeText(trackingId);

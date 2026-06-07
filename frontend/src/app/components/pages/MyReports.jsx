@@ -84,10 +84,50 @@ export function MyReports() {
   const [sortBy, setSortBy] = useState('newest');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [selectedReport, setSelectedReport] = useState(null);
+  const [reports, setReports] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const loggedIn = localStorage.getItem('isLoggedIn') === 'true';
     setIsLoggedIn(loggedIn);
+
+    if (loggedIn) {
+      const fetchReports = async () => {
+        try {
+          const token = localStorage.getItem('token');
+          const response = await fetch('http://localhost:5000/api/reports/my-reports', {
+            headers: {
+              'Authorization': `Bearer ${token}`
+            }
+          });
+          const data = await response.json();
+          if (response.ok && data.success) {
+            const mapped = data.data.reports.map(r => ({
+              id: r.id,
+              type: r.category.replace('-', ' '),
+              district: r.location.split(',')[0] || r.location,
+              date: r.date,
+              status: r.status === 'Resolved' ? 'resolved' : r.status === 'In Progress' ? 'investigating' : 'under-review',
+              progress: r.status === 'Resolved' ? 100 : r.status === 'In Progress' ? 65 : 45,
+              description: r.description,
+              lastUpdate: r.remarks || (r.status === 'Resolved' ? 'Case closed. Action taken.' : 'Official verification in progress.'),
+              history: [
+                { status: 'Submitted', date: r.date },
+                { status: r.status, date: r.date }
+              ]
+            }));
+            setReports(mapped);
+          }
+        } catch (err) {
+          console.error('Error fetching reports:', err);
+        } finally {
+          setLoading(false);
+        }
+      };
+      fetchReports();
+    } else {
+      setLoading(false);
+    }
   }, []);
 
   const getStatusConfig = (status) => {
@@ -100,7 +140,7 @@ export function MyReports() {
     }
   };
 
-  const filteredReports = INITIAL_REPORTS
+  const filteredReports = reports
     .filter(report => {
       const matchesSearch = report.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
         report.type.toLowerCase().includes(searchTerm.toLowerCase());
@@ -303,11 +343,13 @@ export function MyReports() {
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div className="p-4 bg-white/[0.03] border border-white/5 rounded-2xl text-center">
-                    <div className="text-2xl font-bold text-white">{INITIAL_REPORTS.length}</div>
+                    <div className="text-2xl font-bold text-white">{reports.length}</div>
                     <div className="text-[10px] text-muted-foreground font-bold uppercase tracking-tight">Total Filed</div>
                   </div>
                   <div className="p-4 bg-emerald-500/10 border border-emerald-500/20 rounded-2xl text-center">
-                    <div className="text-2xl font-bold text-emerald-500">1</div>
+                    <div className="text-2xl font-bold text-emerald-500">
+                      {reports.filter(r => r.status === 'resolved').length}
+                    </div>
                     <div className="text-[10px] text-emerald-500/80 font-bold uppercase tracking-tight">Resolved</div>
                   </div>
                 </div>
