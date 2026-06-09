@@ -1,0 +1,25 @@
+{
+  "name": "shotto-bd-selenium-tests",
+  "version": "1.0.0",
+  "description": "Selenium WebDriver automated tests for login and signup pages of Shotto-BD",
+  "main": "config.js",
+  "scripts": {
+    "test": "mocha \"**/*.test.js\" --timeout 60000 --exit"
+  },
+  "keywords": [
+    "selenium",
+    "webdriver",
+    "mocha",
+    "testing",
+    "login",
+    "signup"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^4.3.7",
+    "dotenv": "^16.4.5",
+    "mocha": "^10.4.0",
+    "selenium-webdriver": "^4.20.0"
+  }
+}
