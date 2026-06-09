@@ -13,11 +13,8 @@ export const signupValidator = [
     .normalizeEmail(),
 
   body('password')
-    .notEmpty().withMessage('Password is required')
-    .isLength({ min: 8 }).withMessage('Password must be at least 8 characters')
-    .matches(/[A-Z]/).withMessage('Password must contain an uppercase letter')
-    .matches(/[a-z]/).withMessage('Password must contain a lowercase letter')
-    .matches(/\d/).withMessage('Password must contain a number'),
+     .notEmpty().withMessage('Password is required')
+     .isLength({ min: 4 }).withMessage('Password must be at least 4 characters'),
 
   body('role')
     .optional()
@@ -25,15 +22,15 @@ export const signupValidator = [
     .withMessage('Role must be one of: citizen, official, journalist, auditor'),
 
   body('phone')
-    .optional().trim()
+    .optional({ values: 'falsy' }).trim()
     .matches(/^[+]?[\d\s\-()]{7,20}$/).withMessage('Please provide a valid phone number'),
 
   body('organization')
-    .optional().trim()
+    .optional({ values: 'falsy' }).trim()
     .isLength({ max: 200 }).withMessage('Organization cannot exceed 200 characters'),
 
   body('nationalId')
-    .optional().trim()
+    .optional({ values: 'falsy' }).trim()
     .notEmpty().withMessage('National ID cannot be blank if provided'),
 ];
 
@@ -64,7 +61,7 @@ export const forgotPasswordValidator = [
 export const resetPasswordValidator = [
   body('newPassword')
     .notEmpty().withMessage('New password is required')
-    .isLength({ min: 8 }).withMessage('Password must be at least 8 characters'),
+    .isLength({ min: 4 }).withMessage('Password must be at least 4 characters'),
 
   body('confirmPassword')
     .notEmpty().withMessage('Please confirm your new password')

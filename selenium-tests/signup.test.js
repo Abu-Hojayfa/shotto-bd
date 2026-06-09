@@ -50,12 +50,12 @@ describe('Signup Page', function () {
 
     await nameInput.sendKeys('Test Citizen');
     await emailInput.sendKeys(`test_${Date.now()}@example.com`);
-    await passwordInput.sendKeys('weak');
-    await confirmPasswordInput.sendKeys('weak');
+    await passwordInput.sendKeys('123');
+    await confirmPasswordInput.sendKeys('123');
     await submitBtn.click();
 
     const alert = await waitForElement(driver, By.css('.bg-destructive\\/10 span'));
-    expect(await alert.getText()).to.include('Please choose a stronger password');
+    expect(await alert.getText()).to.include('at least 4 characters');
   });
 
   it('shows error if terms are not accepted', async () => {

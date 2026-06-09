@@ -91,13 +91,13 @@ export function Signup() {
       return;
     }
 
-    if (formData.password !== formData.confirmPassword) {
-      setError('Passwords do not match');
+    if (formData.password.length < 4) {
+      setError('Password must be at least 4 characters');
       return;
     }
 
-    if (passwordStrength < 2) {
-      setError('Please choose a stronger password');
+    if (formData.password !== formData.confirmPassword) {
+      setError('Passwords do not match');
       return;
     }
 
@@ -130,27 +130,24 @@ export function Signup() {
           return;
       }
 
-      
+      const user = data.data.user;
+      const token = data.data.accessToken;
 
       // Store session info
+      localStorage.setItem('token', token);
       localStorage.setItem('isLoggedIn', 'true');
-      localStorage.setItem('userEmail', formData.email);
-      localStorage.setItem('userName', formData.name);
-      localStorage.setItem('userRole', role);
+      localStorage.setItem('userEmail', user.email);
+      localStorage.setItem('userName', user.fullName);
+      localStorage.setItem('userRole', user.role);
 
-      if (role === 'official') {
+      if (user.role === 'official') {
         localStorage.setItem('isAdmin', 'true');
-        localStorage.setItem('officialId', formData.governmentId);
-        localStorage.setItem('department', formData.department);
-      }
-
-      // Optional token save
-      if (data.token) {
-        localStorage.setItem('token', data.token);
+        localStorage.setItem('officialId', user.nationalId || formData.governmentId);
+        localStorage.setItem('department', user.organization || formData.department);
       }
 
       window.location.href =
-        role === 'official'
+        user.role === 'official'
           ? '/admin-dashboard'
           : '/dashboard';
 
@@ -358,58 +355,62 @@ export function Signup() {
             </div>
 
             {/* Organization (Optional) */}
-            <div className="space-y-2">
-              <label
-                htmlFor="department"
-                className="text-sm font-medium text-foreground"
-              >
-                Organization{" "}
-                <span className="text-xs text-muted-foreground">
-                  (Optional)
-                </span>
-              </label>
+            {role === 'citizen' && (
+              <div className="space-y-2">
+                <label
+                  htmlFor="department-optional"
+                  className="text-sm font-medium text-foreground"
+                >
+                  Organization{" "}
+                  <span className="text-xs text-muted-foreground">
+                    (Optional)
+                  </span>
+                </label>
 
-              <Input
-                id="department"
-                type="text"
-                placeholder="Enter your organization"
-                value={formData.department}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    department: e.target.value,
-                  })
-                }
-                className="bg-input border-border text-foreground"
-              />
-            </div>
+                <Input
+                  id="department-optional"
+                  type="text"
+                  placeholder="Enter your organization"
+                  value={formData.department}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      department: e.target.value,
+                    })
+                  }
+                  className="bg-input border-border text-foreground"
+                />
+              </div>
+            )}
 
             {/* Government ID (Optional) */}
-            <div className="space-y-2">
-              <label
-                htmlFor="governmentId"
-                className="text-sm font-medium text-foreground"
-              >
-                Government ID{" "}
-                <span className="text-xs text-muted-foreground">
-                  (Optional)
-                </span>
-              </label>
+            {role === 'citizen' && (
+              <div className="space-y-2">
+                <label
+                  htmlFor="governmentId-optional"
+                  className="text-sm font-medium text-foreground"
+                >
+                  Government ID{" "}
+                  <span className="text-xs text-muted-foreground">
+                    (Optional)
+                  </span>
+                </label>
 
-              <Input
-                id="governmentId"
-                type="text"
-                placeholder="Enter your government ID"
-                value={formData.governmentId}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    governmentId: e.target.value,
-                  })
-                }
-                className="bg-input border-border text-foreground"
-              />
-            </div>
+                <Input
+                  id="governmentId-optional"
+                  type="text"
+                  placeholder="Enter your government ID"
+                  value={formData.governmentId}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      governmentId: e.target.value,
+                    })
+                  }
+                  className="bg-input border-border text-foreground"
+                />
+              </div>
+            )}
 
             {/* Password */}
             <div className="space-y-2">

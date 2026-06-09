@@ -1,5 +1,4 @@
-import { Server }
-  from "socket.io";
+import { Server, Socket } from "socket.io";
 
 let io: Server;
 
@@ -20,7 +19,7 @@ export const initSocket =
     io.on(
       "connection",
 
-      ( socket ) => {
+      ( socket: Socket ) => {
 
         console.log(
           `⚡ Socket connected: ${ socket.id }`

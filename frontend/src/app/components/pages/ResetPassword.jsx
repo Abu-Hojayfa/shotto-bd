@@ -24,8 +24,8 @@ export function ResetPassword() {
       return;
     }
 
-    if (newPassword.length < 8) {
-      setError('Password must be at least 8 characters long');
+    if (newPassword.length < 4) {
+      setError('Password must be at least 4 characters long');
       return;
     }
 

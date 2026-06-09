@@ -5,6 +5,7 @@ import officeRoutes from './office.routes';
 import reportRoutes from './report.routes';
 import departmentRoutes from './department.routes';
 import grievanceRoutes from './grievance.routes';
+import emergencyRoutes from './emergency.routes';
 
 export const registerRoutes = (app: Application): void => {
   app.use('/api/auth',        authRoutes);
@@ -13,4 +14,5 @@ export const registerRoutes = (app: Application): void => {
   app.use('/api/reports',     reportRoutes);
   app.use('/api/departments', departmentRoutes);
   app.use('/api/grievances',  grievanceRoutes);
+  app.use('/api/emergency',   emergencyRoutes);
 };

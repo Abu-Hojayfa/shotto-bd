@@ -1,7 +1,7 @@
 import 'dotenv/config';
-import http from "http";
 import connectDB from './config/db';
 import createApp from './server';
+import { initSocket } from './socket/socket';
 
 const PORT = parseInt(process.env.PORT ?? '5000', 10);
 
@@ -10,9 +10,6 @@ const start = async (): Promise<void> => {
 
   const app    = createApp();
 
-  // Initialize socket
-  initSocket( httpServer );
-  
   const server = app.listen(PORT, () => {
     console.log(`\n🚀 Server  : http://localhost:${PORT}`);
     console.log(`🔗 Health  : http://localhost:${PORT}/health`);
@@ -22,6 +19,9 @@ const start = async (): Promise<void> => {
     console.log(`🔐 Auth    : http://localhost:${PORT}/api/auth`);
     console.log(`👤 Users   : http://localhost:${PORT}/api/users\n`);
   });
+
+  // Initialize socket
+  initSocket( server );
 
   const shutdown = (sig: string) => {
     console.log(`\n${sig} received — shutting down`);
